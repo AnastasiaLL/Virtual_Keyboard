@@ -366,23 +366,48 @@ const letterLayout = [
 
 const keys = document.querySelectorAll('.key');
 
-
 for (i = 0; i < keys.length; i++){
 
     if ( !letterLayout.includes(keys[i].textContent) ){
         if (keys[i].textContent === ' '){
             keys[i].classList.add('space')
+            keys[i].classList.add('keyBtn')
         }else{
             keys[i].classList.add(`${keys[i].textContent}`)
+            keys[i].classList.add('keyBtn')
         }
     }
 }
 
 keys.forEach(element => {
-    element.addEventListener('click', keyClick)
+
+    if (element.classList.contains('keyBtn')) {
+        element.addEventListener('click', function (event){
+
+            event.target.classList.remove('removeSymbol')
+            event.target.classList.add('removeSymbol')
+
+            input.textContent += element.textContent;
+
+
+        })
+    }else {
+        element.addEventListener('click', function (event){
+
+            event.target.classList.add('removeLetter')
+            input.textContent += element.textContent;
+
+        })
+    }
+   
 });
 
-function keyClick(el){
-    console.log(el)
-    el.classList.add('active')
-}
+// function keyClick(el){
+//     console.log(el)
+//     el.classList.add('active')
+// }
+
+// keys.addEventListener( 'click', function (event){
+//     console.log(event)
+//     event.target.classList.add('active')
+// })

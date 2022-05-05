@@ -56,7 +56,7 @@
     background-color: #c8ff48;
 }
 
-.key.remove {
+.key.removeLetter {
     animation: key-animation 0.5s forwards;
 }
 
@@ -65,9 +65,24 @@
         background-color: #a348ff;
     }
     100% {
-        background-color: #ff48f3;
+        background-color: #444444;
     }
 }
+
+.keyBtn.removeSymbol {
+    animation: keyBtn 0.5s forwards;
+}
+
+@keyframes keyBtn {
+    0% {
+        background-color: #a348ff;
+    }
+    100% {
+        background-color: #813f8a;
+    }
+}
+
+
 
 .space {
     background-color: #813f8a;

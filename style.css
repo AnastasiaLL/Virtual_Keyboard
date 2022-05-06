@@ -1,6 +1,7 @@
 .keyBoardWrapper {
     display: flex;
-    max-width: 700px;
+    padding-bottom: 29px;
+    max-width: 767px;
     background-color: rgb(218, 214, 245);
     margin: 0 auto;
     flex-direction: column;
@@ -86,7 +87,7 @@
 
 .space {
     background-color: #813f8a;
-    width: 318px
+    width: 317px;
 }
 .Backspace {
     background-color: #813f8a;
@@ -94,7 +95,7 @@
 }
 .Delete {
     background-color: #813f8a;
-    width: 44px
+    width: 47px
 }
 .CapsLock{
     background-color: #813f8a;
@@ -106,14 +107,16 @@
 }
 .Shift{
     background-color: #813f8a;
-    width: 84px
+    width: 92px;
 }
 .Tab{
     background-color: #813f8a;
+    width: 47px
 
 }
 .Ctrl{
     background-color: #813f8a;
+    width: 45px
 
 }
 .Alt{

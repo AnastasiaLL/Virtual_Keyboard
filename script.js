@@ -348,6 +348,10 @@ for (let i = 0; i < keyboard.length; i++) {
 
 
 
+
+
+let flag = false;  //для capsLock виртуальной и реальной//
+
 // реальная клавиатура
 document.addEventListener('keydown', keydown)
 
@@ -405,7 +409,32 @@ function keydown(event) {
       } else if (elem.code == "AltLeft") {
         //ДОБАВИТЬ
         input.textContent = input.textContent;
-      
+
+         //клавиша capsLock на реальной клавиатуре:  
+      } else if (elem.code == "CapsLock") {
+
+        if (flag == false){
+          keyboard.forEach(elem => { elem.key = elem.key.toUpperCase()})
+          keys.forEach(elem => {
+            if (!elem.classList.contains('keyBtn')) {
+              elem.textContent = elem.textContent.toUpperCase();     
+            }
+          })
+          flag = true
+
+        } else {
+          keyboard.forEach(elem => { elem.key = elem.key.toLowerCase()})
+          keys.forEach(elem => {
+            if (!elem.classList.contains('keyBtn')) {
+              elem.textContent = elem.textContent.toLowerCase();     
+            }
+          })
+
+          flag = false
+        }
+          
+        
+
 
       } else {
         input.textContent += elem.key;
@@ -459,6 +488,8 @@ for (i = 0; i < keys.length; i++) {
   }
 }
 
+
+
 // добавляю обработчики клика на виртуальные кнопки
 keys.forEach(element => {
 
@@ -478,8 +509,22 @@ keys.forEach(element => {
       } else if (event.target.classList.contains('CapsLock')) {
         event.target.classList.toggle('removeSymbol')
 
-        // ====== ДОБАВИТЬ======//
-
+        if (flag == false){
+          keys.forEach(elem => {
+            if (!elem.classList.contains('keyBtn')) {
+              elem.textContent = elem.textContent.toUpperCase();     
+              flag = true; 
+            }
+          })
+        } else {
+          keys.forEach(elem => {
+            if (!elem.classList.contains('keyBtn')) {
+              elem.textContent = elem.textContent.toLowerCase();
+              flag = false; 
+            }
+          })
+        }  
+      
         //клавиша Delete на виртуальной клавиатуре:
       } else if (event.target.classList.contains('Delete')) {
         event.target.classList.toggle('removeSymbol')

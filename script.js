@@ -527,45 +527,7 @@ function keydown(event) {
   
 }
 
-// document.addEventListener('keydown', animationDown)
-
-// function animationDown (event){
-//   keys.forEach(element => {
-//     element.classList.remove('removeSymbol');
-//     element.classList.remove('removeLetter');
-//   });
-
-//   console.log(event.code)
-//   document.querySelector(`.${event.code}`).classList.add('removeSymbol')
   
-
-//     // keys[58].classList.add('removeSymbol')
-  
-// }
-
-// document.addEventListener('keyup', animationUp)
-
-// function animationUp (){
-//   console.log('Up')
-//   keys.forEach(element => {
-  
-  //     if (element.classList.contains('keyBtn')) {
-    //       element.classList.remove('removeSymbol')
-    //     } else {
-      //       element.classList.remove('removeLetter')
-      //     }
-      
-      //   });
-      
-      // }
-      
-      
-      
-      
-      
-      
-      
-      
       
       
       
@@ -682,7 +644,7 @@ function virtKeyAction(){
 
         //клавиша Backspace на виртуальной клавиатуре:
         if (event.target.classList.contains('Backspace')) {
-          event.target.classList.toggle('removeSymbol')
+          // event.target.classList.toggle('removeSymbol')
 
           let text = input.textContent;
           text = text.substring(0, text.length - 1);
@@ -690,7 +652,7 @@ function virtKeyAction(){
           console.log(text)
 
           //клавиша CapsLock на виртуальной клавиатуре:
-        } else if (event.target.classList.contains('CapsLock')) {
+        } else if (event.target.classList.contains('CapsLock') || event.target.classList.contains('capslock')) {
           event.target.classList.toggle('removeSymbol')
 
           if (flag == false) {
@@ -711,25 +673,34 @@ function virtKeyAction(){
 
           //клавиша Delete на виртуальной клавиатуре:
         } else if (event.target.classList.contains('Delete')) {
-          event.target.classList.toggle('removeSymbol')
+          // event.target.classList.toggle('removeSymbol')
+          input.textContent += ''
           // ====== ДОБАВИТЬ======//
 
 
           //клавиша enter на виртуальной клавиатуре:
         } else if (event.target.classList.contains('Enter')) {
-          event.target.classList.toggle('removeSymbol')
+          // event.target.classList.toggle('removeSymbol')
           input.textContent += '\n'
         }
 
         //клавиша Alt на виртуальной клавиатуре:
         else if (event.target.classList.contains('Alt')) {
-          event.target.classList.toggle('removeSymbol')
+          // event.target.classList.toggle('removeSymbol')
           input.textContent += ''
         }           // ====== ДОБАВИТЬ======//
 
+
+        //клавиша Ctrl на виртуальной клавиатуре:
+        else if (event.target.classList.contains('Ctrl')) {
+          // event.target.classList.toggle('removeSymbol')
+          input.textContent += ''
+        }            
+
         //клавишИ Shift на виртуальной клавиатуре:
         else if (event.target.classList.contains('Shift')) {
-          event.target.classList.toggle('removeSymbol')
+          console.log(1)
+          // event.target.classList.toggle('removeSymbol')
           if (shh == 'up'){
             shdown()
           }else{
@@ -738,7 +709,7 @@ function virtKeyAction(){
         }       
 
         else {
-          event.target.classList.toggle('removeSymbol')
+          // event.target.classList.toggle('removeSymbol')
           input.textContent += element.textContent;
         }
 
@@ -746,7 +717,7 @@ function virtKeyAction(){
     } else {
       element.addEventListener('click', function (event) {
 
-        event.target.classList.toggle('removeLetter')
+        // event.target.classList.toggle('removeLetter')
         input.textContent += element.textContent;
 
       })
@@ -759,5 +730,59 @@ virtKeyAction()
 
 
 
-// анимация клавиатуры
+// анимация реальной клавиатуры
 
+for (let i=0; i < keys.length; i++){
+  keys[i].classList.add(`${keyboard[i].code}`)
+}
+
+
+document.addEventListener('keydown', animationKeyDown)
+
+function animationKeyDown (event){
+
+  for (let i=0; i<keys.length; i++){
+
+    if( keys[i].classList.contains(`${event.code}`)){
+      keys[i].classList.add('removeLetter')
+    }
+  }
+}
+
+document.addEventListener('keyup', animationKeyUp)
+
+function animationKeyUp (event){
+  for (let i=0; i<keys.length; i++){
+
+    if( keys[i].classList.contains(`${event.code}`)){
+      keys[i].classList.remove('removeLetter')
+    }
+  }
+}
+
+
+// анимация виртуальной клавиатуры
+
+board.addEventListener('mousedown', animationMouseDown)
+
+function animationMouseDown (event){
+  if (event.target.classList.contains('key')){
+    event.target.classList.add('removeLetter')
+  }
+}
+
+board.addEventListener('mouseup', animationMouseUp)
+
+function animationMouseUp (event){
+  if (event.target.classList.contains('key')){
+    event.target.classList.remove('removeLetter')
+  }
+}
+
+board.addEventListener('mouseout', animationMouseOut)
+
+function animationMouseOut (event){
+  if (event.target.classList.contains('key')){
+    event.target.classList.remove('removeLetter')
+  }
+}

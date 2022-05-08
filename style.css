@@ -142,3 +142,52 @@
 }
 
 
+
+.space {
+    background-color: #813f8a;
+    width: 317px;
+    color: #813f8a;
+}
+.backspace {
+    background-color: #813f8a;
+    width: 100px
+}
+.delete {
+    background-color: #813f8a;
+    width: 47px
+}
+.capsLock{
+    background-color: #813f8a;
+    width: 100px
+}
+.enter{
+    background-color: #813f8a;
+    width: 86px
+}
+.shift{
+    background-color: #813f8a;
+    width: 92px;
+}
+.tab{
+    background-color: #813f8a;
+    width: 47px
+
+}
+.ctrl{
+    background-color: #813f8a;
+    width: 45px
+
+}
+.alt{
+    background-color: #813f8a;
+
+}
+.meta{
+    background-color: #813f8a;
+
+}
+.capslock{
+    background-color: #813f8a;
+    width: 100px
+}
+

@@ -12,6 +12,12 @@
     margin: 0 auto;
 }
 
+.subtitle{
+    padding-top: 10px;
+    margin: 0 auto;
+    height: 5px;
+}
+
 .input{
     display: block;
     width: 650px;
@@ -58,12 +64,13 @@
 }
 
 .key.removeLetter {
-    animation: key-animation 0.5s forwards;
+    animation: key-animation 0.7s forwards;
 }
 
 @keyframes key-animation {
     0% {
         background-color: #a348ff;
+        border-radius: 25px;
     }
     100% {
         background-color: #444444;
@@ -71,12 +78,13 @@
 }
 
 .keyBtn.removeSymbol {
-    animation: keyBtn 0.5s forwards;
+    animation: keyBtn 0.7s forwards;
 }
 
 @keyframes keyBtn {
     0% {
         background-color: #a348ff;
+        border-radius: 25px;
     }
     100% {
         background-color: #813f8a;

@@ -311,11 +311,18 @@ class Text {
     h1.innerText = this.content;
     keyBoardWrapper.append(h1);
   }
+  ap3() {
+    let h3 = document.createElement('h3');
+    h3.classList.add('subtitle')
+    h3.innerText = this.content;
+    keyBoardWrapper.append(h3);
+  }
 }
 
 const title = new Text();
 title.content = 'RSS Виртуальная клавиатура';
 title.ap();
+
 
 const input = document.createElement('textarea');
 input.classList.add('input');
@@ -376,24 +383,60 @@ class Keyboard{
 
 }
 
+
 let virtual_keyboard = new Keyboard();
-virtual_keyboard.eng()
-// console.log(eng.qqqq[14].content)
-let lang = 'eng';
+
+let lang;
+loc()
+
+
+if (lang == 'eng'){
+  virtual_keyboard.eng()
+
+} else {
+  virtual_keyboard.ru()
+
+}
+
+
+
+function loc(){
+  lang = localStorage.getItem('lg');
+  if (lang == null){
+    lang = 'eng';
+    localStorage.setItem('lg', lang);
+    console.log (lang + '1')
+  }else {
+    localStorage.setItem('lg', lang);
+    console.log (lang + '2')
+  }
+
+}
+
 
 
 function rr () {
   board.textContent = '';
   virtual_keyboard.ru()
   lang = 'ru'
+  localStorage.setItem('lg', lang);
+  console.log (lang + '3')
   styles()
 }
 function ee () {
   board.textContent = '';
   virtual_keyboard.eng()
   lang = 'eng';
+  localStorage.setItem('lg', lang);
+  console.log (lang + '3')
   styles()
 }
+
+
+
+const subtitle = new Text();
+subtitle.content = 'Для переключения языка комбинация: левыe ctrl + alt';
+subtitle.ap3();
 
 
 

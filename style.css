@@ -31,7 +31,7 @@
     padding: 5px;
     padding-left: 0;
     padding-bottom: 0;
-    background: #b2edf2;
+    background: #999999;
     border: 3px solid #813f8a;
     border-radius: 5px;
 }
@@ -88,6 +88,7 @@
 .space {
     background-color: #813f8a;
     width: 317px;
+    color: #813f8a;
 }
 .Backspace {
     background-color: #813f8a;

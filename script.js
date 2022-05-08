@@ -327,6 +327,7 @@ keyBoardWrapper.append(board);
 
 let shh = 'down'
 
+
 class KeyCreator {
   constructor() {
     this.content = '';
@@ -341,13 +342,14 @@ class KeyCreator {
 }
 
 
+
+
 class Keyboard{
   constructor(){
     this.qqqq = [];
     for (let i=0; i < 64; i++){
       let key = new KeyCreator();
       this.qqqq.push(key)
-      console.log(this.qqqq[i])
     }
   }
 
@@ -396,63 +398,9 @@ function ee () {
 
 
 
-
-
-
 let flag = false;  //для capsLock виртуальной и реальной//
 
 // реальная клавиатура
-
-// переключение языка. одновременно нажатие клавиш alt +ctrl
-
-function runOnKeys(func, ...codes) {
-  let pressed = new Set();
-
-  document.addEventListener('keydown', function (event) {
-    pressed.add(event.code);
-
-    for (let code of codes) {
-      if (!pressed.has(code)) {
-        return;
-      }
-    }
-
-    pressed.clear();
-
-    func();
-  });
-
-  document.addEventListener('keyup', function (event) {
-    pressed.delete(event.code);
-  });
-
-}
-
-runOnKeys(function () {
-
-  if (leng == 'eng') {
-    // for (let i = 0; i < keyboard.length; i++) {
-    //   let key = new KeyCreator();
-    //   if (keyboard[i].keyRu == undefined) {
-    //     key.content = keyboard[i].key;
-    //   } else {
-    //     key.content = keyboard[i].keyRu;
-    //   }
-    // }
-    rr ()
-    leng = 'ru'
-  } else {
-    // board.textContent = '';
-    // let eng = new KeyCreator();
-    // eng.eng()
-    ee ()
-    leng = 'eng';
-  }
-  
-}, "ControlLeft", "AltLeft");
-
-
-
 
 
 document.addEventListener('keydown', keydown)
@@ -543,13 +491,17 @@ function keydown(event) {
               elem.textContent = elem.textContent.toLowerCase();
             }
           })
-
+          
           flag = false
         }
 
       } else {
+        if (lang == 'eng') {
         input.textContent += elem.key;
-
+        } else {
+          input.textContent += elem.keyRu;
+        }
+        //добавить правило для языка
       }
     }
   });
@@ -575,62 +527,62 @@ function keydown(event) {
   
 }
 
-document.addEventListener('keydown', animationDown)
+// document.addEventListener('keydown', animationDown)
 
-function animationDown (event){
-  keys.forEach(element => {
-    element.classList.remove('removeSymbol');
-    element.classList.remove('removeLetter');
-  });
+// function animationDown (event){
+//   keys.forEach(element => {
+//     element.classList.remove('removeSymbol');
+//     element.classList.remove('removeLetter');
+//   });
 
-  console.log(event.code)
-  document.querySelector(`.${event.code}`).classList.add('removeSymbol')
+//   console.log(event.code)
+//   document.querySelector(`.${event.code}`).classList.add('removeSymbol')
   
 
-    // keys[58].classList.add('removeSymbol')
+//     // keys[58].classList.add('removeSymbol')
   
-}
+// }
 
-document.addEventListener('keyup', animationUp)
+// document.addEventListener('keyup', animationUp)
 
-function animationUp (){
-  console.log('Up')
-  keys.forEach(element => {
-    
-    if (element.classList.contains('keyBtn')) {
-      element.classList.remove('removeSymbol')
-    } else {
-      element.classList.remove('removeLetter')
-    }
+// function animationUp (){
+//   console.log('Up')
+//   keys.forEach(element => {
+  
+  //     if (element.classList.contains('keyBtn')) {
+    //       element.classList.remove('removeSymbol')
+    //     } else {
+      //       element.classList.remove('removeLetter')
+      //     }
       
-  });
-
-}
-
-
-
-
-
-
-
-
-
-
-
-// функция для шифта:
-const arr = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+']
-function shup(){
-  for (let i=0; i < keys.length - 51; i++){
-    keys[i].textContent = arr[i];
-    shh ='up'
-  }
-}
-function shdown(){
-  for (let i=0; i < keys.length - 51; i++){
-    keys[i].textContent = keyboard[i].key;
-    shh ='down'
-  }
-}
+      //   });
+      
+      // }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      // функция для шифта:
+      const arr = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+']
+      function shup(){
+        for (let i=0; i < keys.length - 51; i++){
+          keys[i].textContent = arr[i];
+          shh ='up'
+        }
+      }
+      function shdown(){
+        for (let i=0; i < keys.length - 51; i++){
+          keys[i].textContent = keyboard[i].key;
+          shh ='down'
+        }
+      }
 
 // виртуальная клавиатура
 
@@ -641,7 +593,7 @@ const letterLayout = [
   "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
 ];
 
-const keys = document.querySelectorAll('.key');
+// const keys = document.querySelectorAll('.key');
 
 // добавляю классы для виртуальной клавиатуры
 
@@ -666,90 +618,144 @@ function styles() {
   }
 }
 
+// переключение языка. одновременно нажатие клавиш alt +ctrl
+let keys = document.querySelectorAll('.key');
+
+function runOnKeys(func, ...codes) {
+  let pressed = new Set();
+
+  document.addEventListener('keydown', function (event) {
+    pressed.add(event.code);
+
+    for (let code of codes) {
+      if (!pressed.has(code)) {
+        return;
+      }
+    }
+
+    pressed.clear();
+
+    func();
+  });
+
+  document.addEventListener('keyup', function (event) {
+    pressed.delete(event.code);
+    keys = document.querySelectorAll('.key')
+  });
+
+}
+
+runOnKeys(function () {
+
+  if (lang == 'eng') {
+
+    rr ()
+    keys = document.querySelectorAll('.key')
+   virtKeyAction()
+    lang = 'ru'
+    
+  } else {
+
+    ee ()
+    keys = document.querySelectorAll('.key')
+    
+    virtKeyAction()
+    lang = 'eng';
+
+    
+  }
+  keys = document.querySelectorAll('.key')
+}, "ControlLeft", "AltLeft");
+
 
 
 
 
 // добавляю обработчики клика на виртуальные кнопки
-keys.forEach(element => {
 
-  if (element.classList.contains('keyBtn')) {
-    element.addEventListener('click', function (event) {
 
-      //клавиша Backspace на виртуальной клавиатуре:
-      if (event.target.classList.contains('Backspace')) {
-        event.target.classList.toggle('removeSymbol')
+function virtKeyAction(){
+  keys.forEach(element => {
 
-        let text = input.textContent;
-        text = text.substring(0, text.length - 1);
-        input.textContent = text
-        console.log(text)
+    if (element.classList.contains('keyBtn')) {
+      element.addEventListener('click', function (event) {
 
-        //клавиша CapsLock на виртуальной клавиатуре:
-      } else if (event.target.classList.contains('CapsLock')) {
-        event.target.classList.toggle('removeSymbol')
+        //клавиша Backspace на виртуальной клавиатуре:
+        if (event.target.classList.contains('Backspace')) {
+          event.target.classList.toggle('removeSymbol')
 
-        if (flag == false) {
-          keys.forEach(elem => {
-            if (!elem.classList.contains('keyBtn')) {
-              elem.textContent = elem.textContent.toUpperCase();
-              flag = true;
-            }
-          })
-        } else {
-          keys.forEach(elem => {
-            if (!elem.classList.contains('keyBtn')) {
-              elem.textContent = elem.textContent.toLowerCase();
-              flag = false;
-            }
-          })
+          let text = input.textContent;
+          text = text.substring(0, text.length - 1);
+          input.textContent = text
+          console.log(text)
+
+          //клавиша CapsLock на виртуальной клавиатуре:
+        } else if (event.target.classList.contains('CapsLock')) {
+          event.target.classList.toggle('removeSymbol')
+
+          if (flag == false) {
+            keys.forEach(elem => {
+              if (!elem.classList.contains('keyBtn')) {
+                elem.textContent = elem.textContent.toUpperCase();
+                flag = true;
+              }
+            })
+          } else {
+            keys.forEach(elem => {
+              if (!elem.classList.contains('keyBtn')) {
+                elem.textContent = elem.textContent.toLowerCase();
+                flag = false;
+              }
+            })
+          }
+
+          //клавиша Delete на виртуальной клавиатуре:
+        } else if (event.target.classList.contains('Delete')) {
+          event.target.classList.toggle('removeSymbol')
+          // ====== ДОБАВИТЬ======//
+
+
+          //клавиша enter на виртуальной клавиатуре:
+        } else if (event.target.classList.contains('Enter')) {
+          event.target.classList.toggle('removeSymbol')
+          input.textContent += '\n'
         }
 
-        //клавиша Delete на виртуальной клавиатуре:
-      } else if (event.target.classList.contains('Delete')) {
-        event.target.classList.toggle('removeSymbol')
-        // ====== ДОБАВИТЬ======//
+        //клавиша Alt на виртуальной клавиатуре:
+        else if (event.target.classList.contains('Alt')) {
+          event.target.classList.toggle('removeSymbol')
+          input.textContent += ''
+        }           // ====== ДОБАВИТЬ======//
 
+        //клавишИ Shift на виртуальной клавиатуре:
+        else if (event.target.classList.contains('Shift')) {
+          event.target.classList.toggle('removeSymbol')
+          if (shh == 'up'){
+            shdown()
+          }else{
+            shup()
+          } 
+        }       
 
-        //клавиша enter на виртуальной клавиатуре:
-      } else if (event.target.classList.contains('Enter')) {
-        event.target.classList.toggle('removeSymbol')
-        input.textContent += '\n'
-      }
+        else {
+          event.target.classList.toggle('removeSymbol')
+          input.textContent += element.textContent;
+        }
 
-      //клавиша Alt на виртуальной клавиатуре:
-      else if (event.target.classList.contains('Alt')) {
-        event.target.classList.toggle('removeSymbol')
-        input.textContent += ''
-      }           // ====== ДОБАВИТЬ======//
+      })
+    } else {
+      element.addEventListener('click', function (event) {
 
-      //клавишИ Shift на виртуальной клавиатуре:
-      else if (event.target.classList.contains('Shift')) {
-        event.target.classList.toggle('removeSymbol')
-        if (shh == 'up'){
-          shdown()
-        }else{
-          shup()
-        } 
-      }       
-
-      else {
-        event.target.classList.toggle('removeSymbol')
+        event.target.classList.toggle('removeLetter')
         input.textContent += element.textContent;
-      }
 
-    })
-  } else {
-    element.addEventListener('click', function (event) {
+      })
+    }
 
-      event.target.classList.toggle('removeLetter')
-      input.textContent += element.textContent;
+  });
+}
 
-    })
-  }
-
-});
-
+virtKeyAction()
 
 
 
